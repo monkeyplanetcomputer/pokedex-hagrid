@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Pokedex {
 
-    public List<Pokemon> pokemons = Arrays.asList(
+    private final List<Pokemon> pokemons = Arrays.asList(
             new Pokemon(1, "Bulbasaur", "Seed Pokémon", "grass", "poison"),
             new Pokemon(2, "Ivysaur", "Seed Pokémon", "grass", "poison"),
             new Pokemon(3, "Venusaur", "Seed Pokémon", "grass", "poison"),
@@ -28,5 +28,25 @@ public class Pokedex {
             new Pokemon(20, "Raticate", "Mouse Pokémon", "normal", "")
     );
 
+    public void searchByNumber(int numberInput) {
+        this.pokemons.stream()
+                .filter(it -> it.getNumber() == numberInput)
+                .findFirst()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("Sorry, Pokémon not found try again you stupid moron.")
+                );
 
+    }
+
+    public void searchByName(String name) {
+        this.pokemons.stream()
+                .filter(it -> it.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("Sorry, Pokémon not found try again you stupid moron.")
+                );
+
+    }
 }

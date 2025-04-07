@@ -15,12 +15,23 @@ class SimplePokedex {
             System.out.print("Would you like to search by name or number?\n");
             String choice = scanner.nextLine().trim().toLowerCase();
 
+            Pokedex pokedex = new Pokedex();
             switch (choice) {
                 case "name":
-                    searchByName(scanner);
+                    System.out.print("Enter Pokémon name: ");
+                    String nameInput = scanner.nextLine().trim();
+                    pokedex.searchByName(nameInput);
                     break;
                 case "number":
-                    searchByNumber(scanner);
+                    System.out.print("Enter Pokédex number HERE: ");
+                    try {
+                        String input = scanner.nextLine().trim();
+                        int inputAsInt = Integer.parseInt(input);
+                        pokedex.searchByNumber(inputAsInt);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid number format moron.");
+                        return;
+                    }
                     break;
                 case "quit":
                     keepRunning = false;
@@ -33,41 +44,5 @@ class SimplePokedex {
         }
 
         scanner.close();
-    }
-
-    private static void searchByNumber(Scanner scanner) {
-        System.out.print("Enter Pokédex number HERE: ");
-        int numberInput;
-        try {
-            numberInput = Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid number format moron.");
-            return;
-        }
-
-        Pokedex pokedex = new Pokedex();
-        pokedex.pokemons.stream()
-                .filter(it -> it.getNumber() == numberInput)
-                .findFirst()
-                .ifPresentOrElse(
-                        System.out::println,
-                        () -> System.out.println("Sorry, Pokémon not found try again you stupid moron.")
-                );
-
-    }
-
-    private static void searchByName(Scanner scanner) {
-        System.out.print("Enter Pokémon name: ");
-        String nameInput = scanner.nextLine().trim();
-
-        Pokedex pokedex = new Pokedex();
-        pokedex.pokemons.stream()
-                .filter(it -> it.getName().equalsIgnoreCase(nameInput))
-                .findFirst()
-                .ifPresentOrElse(
-                        System.out::println,
-                        () -> System.out.println("Sorry, Pokémon not found try again you stupid moron.")
-                );
-
     }
 }
