@@ -1,14 +1,16 @@
 package com.hagrid.pokedex.objects;
 
+import com.hagrid.pokedex.PokemonType;
+
 public class Pokemon {
 
     private int number;
     private String name;
     private String classification;
-    private String type1;
-    private String type2;
+    private PokemonType type1;
+    private PokemonType type2;
 
-    public Pokemon(int number, String name, String classification, String type1, String type2) {
+    public Pokemon(int number, String name, String classification, PokemonType type1, PokemonType type2) {
         this.number = number;
         this.name = name;
         this.classification = classification;
@@ -40,19 +42,19 @@ public class Pokemon {
         this.classification = classification;
     }
 
-    public String getType1() {
+    public PokemonType getType1() {
         return type1;
     }
 
-    public void setType1(String type1) {
+    public void setType1(PokemonType type1) {
         this.type1 = type1;
     }
 
-    public String getType2() {
+    public PokemonType getType2() {
         return type2;
     }
 
-    public void setType2(String type2) {
+    public void setType2(PokemonType type2) {
         this.type2 = type2;
     }
 
@@ -63,7 +65,7 @@ public class Pokemon {
                 this.number +
                 ", " +
                 this.classification +
-                ", type1: " + this.type1 + (this.type2.isEmpty() ? "" : ", type2: " + this.type2) +
+                ", type1: " + this.type1.getTypeName() + (this.type2.equals(PokemonType.UNKNOWN) ? "" : ", type2: " + this.type2.getTypeName()) +
                 "\n";
     }
 }

@@ -11,11 +11,11 @@ class SimplePokedex {
 
         Scanner scanner = new Scanner(System.in);
         boolean keepRunning = true;
+        Pokedex pokedex = new Pokedex();
         while (keepRunning) {
             System.out.print("Would you like to search by name or number?\n");
             String choice = scanner.nextLine().trim().toLowerCase();
 
-            Pokedex pokedex = new Pokedex();
             switch (choice) {
                 case "name":
                     System.out.print("Enter Pokémon name: ");
